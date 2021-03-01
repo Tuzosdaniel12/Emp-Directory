@@ -1,6 +1,6 @@
-function Jumbotron(){
+function JumboComponents(){
     return(
-        <div className="jumbotron bg-primary">
+        <div>
             <h1 className="display-4">Employee Directory</h1>
             <p className="lead">
                 Find employee by name, email or age
@@ -9,4 +9,4 @@ function Jumbotron(){
     )
 }
 
-export default Jumbotron
+export default JumboComponents

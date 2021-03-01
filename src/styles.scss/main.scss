@@ -1,1 +1,8 @@
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./variables";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+
+body{
+    font-family: 'Anton', sans-serif;
+}
