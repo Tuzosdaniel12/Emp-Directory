@@ -61,7 +61,7 @@ const MainSection = () =>{
          displayState.text === "Last A-Z" || 
          displayState.text === "Email A-Z" || 
          displayState.text === "Phone" ||
-         displayState.text === "Age Younger to Young"
+         displayState.text === "Age 0 to 100"
          ){
             num = 1; 
             num2 = -1;
@@ -69,7 +69,7 @@ const MainSection = () =>{
             num = -1; 
             num2 = 1;
          }
-         
+
         const empList = employeeList.sort( (a, b) => a[`${displayState.sortBy}`] > b[`${displayState.sortBy}`]? num:num2)
         return setDisplayState(empList)
 

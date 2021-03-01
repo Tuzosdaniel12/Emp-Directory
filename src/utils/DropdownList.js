@@ -25,11 +25,11 @@ const items = [
             sortBy:"email"
         },
         {
-            text:"Age Younger to Young",
+            text:"Age 0 to 100",
             sortBy:"age"
         },
         {
-            text:"Age Young to Younger",
+            text:"Age 100 to 0",
             sortBy:"age"
         },
         {
