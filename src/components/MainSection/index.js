@@ -7,6 +7,7 @@ import API from "../../utils/API.js"
 const MainSection = () =>{
     
     const [employeeList, setEmployeeListState] = useState([]);
+    const [employeeDispaly, setemployeeDispalyListState] = useState([]);
     const [search, setSearch] = useState("");
     const [displayState, setDisplayState] = useState({});
 
@@ -27,13 +28,14 @@ const MainSection = () =>{
                     }
                 })
                 setEmployeeListState(empList);
+                setemployeeDispalyListState(empList);
         }
         fetchMyAPI()
     }, [])
     
     useEffect(() => {
         if(!search){
-            return 
+            return  setEmployeeListState(employeeDispaly);
         }
 
         const newList = employeeList.filter(
