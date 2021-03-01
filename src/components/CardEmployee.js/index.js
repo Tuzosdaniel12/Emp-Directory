@@ -1,13 +1,15 @@
-const CardEmployee = () =>{
+import Span from "../Span"
+
+const CardEmployee = ({age,email,firstName,lastName,phone,picture}) =>{
+
     return(
         <div className="card col-sm">
-            <img src="..." className="card-img-top" alt="..." />
+            <img src={picture} className="card-img-top" alt={`${firstName} ${lastName}`} />
             <div className="card-body">
-                <h5 className="card-title">Name</h5>
-                <p>Email:</p>
-                <p>Phone:</p>
-                <p>Age:</p>
-                <p>Git Hub:</p>
+                <h4 className="card-title text-primary">{`${firstName} ${lastName}`}</h4>
+                <Span text="Email" value={email}/>
+                <Span text="Phone" value={phone}/>
+                <Span text="Age" value={age}/>
             </div>
         </div>
     )

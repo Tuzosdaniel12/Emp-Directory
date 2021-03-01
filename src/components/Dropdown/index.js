@@ -1,7 +1,16 @@
-function Dropdown(){
+import {useState} from "react"
+function Dropdown(props){
+    const [displayState, setDisplayState] = useState("none");
+    const showDropdown = () => {
 
-    const showDropdown = (action) => {
-        document.querySelector(".dropdown-menu").style.display = action
+        if(displayState === "block") {
+            setDisplayState("none")
+            document.querySelector(".dropdown-menu").setAttribute("data-toggle", "none")
+        }else{
+            setDisplayState("block")
+            document.querySelector(".dropdown-menu").setAttribute("data-toggle", "block")
+        }
+        document.querySelector(".dropdown-menu").style.display = displayState
     };
 
     const items = [
@@ -18,11 +27,19 @@ function Dropdown(){
 
     return(
      <div className= "input-group-prepend" >
-        <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={() => showDropdown("block")}>Filter By:</button>
-        <ul className="dropdown-menu">
+        <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={() => showDropdown()}>Filter By:</button>
+        <ul className="dropdown-menu" data-toggle="none">
             {
-                items.map(({text}) => {
-                    return <li className="dropdown-item" data-action={text} onClick={() => showDropdown("none")}>{text}</li>
+                items.map(({text}, index) => {
+                    return <li 
+                    className="dropdown-item"
+                    key={index} 
+                    value={props.results}
+                    onClick={()=> {showDropdown() 
+                        props.handleSortBy(text)}} 
+                    >
+                    {text}
+                    </li>
                 })
             }
         </ul>

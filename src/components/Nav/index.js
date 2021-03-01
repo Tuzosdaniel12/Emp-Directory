@@ -1,11 +1,11 @@
 import Dropdown  from "../Dropdown";
 import Search from "../Search";
 
-function Nav(){
+function Nav(props){
     return(
         <nav className="input-group mb-3">
-            <Dropdown/>
-            <Search/>
+            <Dropdown {...props}/>
+            <Search {...props}/>
         </nav>
     )
 }
