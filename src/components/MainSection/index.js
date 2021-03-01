@@ -8,10 +8,7 @@ const MainSection = () =>{
     
     const [employeeList, setEmployeeListState] = useState([]);
     const [search, setSearch] = useState("");
-    const [employeeEmail, setEmailState] = useState([]);
-    const [employeePhone, setPhoneState] = useState([]);
-    const [employeeAge, setAgeState] = useState([]);
-    const [displayState, setDisplayState] = useState([]);
+    const [displayState, setDisplayState] = useState({});
 
     useEffect(() => {
         async function fetchMyAPI() {
@@ -20,8 +17,9 @@ const MainSection = () =>{
 
                 const empList = list.data.results.map(emp =>{
                     return{
-                        firstName:emp.name.first,
-                        lastName:emp.name.last,
+                        name:`${emp.name.first} ${emp.name.last}`,
+                        firstName: emp.name.first,
+                        lastName: emp.name.last,
                         phone:emp.cell,
                         age:emp.dob.age,
                         picture:emp.picture.large,
@@ -29,43 +27,58 @@ const MainSection = () =>{
                     }
                 })
                 setEmployeeListState(empList);
-                setDisplayState(empList);
         }
         fetchMyAPI()
     }, [])
     
     useEffect(() => {
         if(!search){
-            return setDisplayState(employeeList)
+            return 
         }
-        if(search === "Name A-Z"|| search === "Email A-Z" || search === "Phone"){
 
-        }
         const newList = employeeList.filter(
-            ({age,email,firstName,lastName,phone,picture}) =>{
-                console.log(typeof age)
+            ({age,email,name,phone}) =>{
             if(
                 age.toString().includes(search) 
                 || email.includes(search) 
-                || firstName.includes(search) 
-                || lastName.includes(search) 
+                || (name.toLowerCase().includes(search.toLowerCase())) 
                 || phone.toString().includes(search) ){
                 return true
             }return false
         })
         
-        setDisplayState(newList)
+        setEmployeeListState(newList)
 
     }, [search]);
+
+     useEffect(() => {
+         let num; 
+         let num2;
+         
+         if(displayState.text === "Name A-Z" || 
+         displayState.text === "Last A-Z" || 
+         displayState.text === "Email A-Z" || 
+         displayState.text === "Phone" ||
+         displayState.text === "Age Younger to Young"
+         ){
+                num = 1; 
+                num2 = -1;
+         }else{
+            num = -1; 
+            num2 = 1;
+         }
+            const empList = employeeList.sort( (a, b) => a[`${displayState.sortBy}`] > b[`${displayState.sortBy}`]? num:num2)
+            return setDisplayState(empList)
+
+     },[displayState])
 
     const handleInputChange = event => {
         setSearch(event.target.value);
     }
 
     const handleSortBy = (sortBy) => {
-        console.log("here ", sortBy);
+        setDisplayState(sortBy)
     }
-
     return(
         <section>
             <Container>
@@ -74,7 +87,7 @@ const MainSection = () =>{
                  handleSortBy={handleSortBy}
                  results={search}
                 />
-                <CardContainer empList={displayState}/>
+                <CardContainer empList={employeeList}/>
             </Container>
         </section>
     )

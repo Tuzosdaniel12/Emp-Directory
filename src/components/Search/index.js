@@ -4,7 +4,7 @@ function Search({results, handleInputChange}){
         type="text" 
         className="form-control" 
         aria-label="Text input with dropdown button" 
-        placeholder="Search"
+        placeholder="Search By Name"
         value={results}
         onChange={handleInputChange}
         />

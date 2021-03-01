@@ -1,4 +1,5 @@
 import {useState} from "react"
+import items from "../../utils/DropdownList.js"
 function Dropdown(props){
     const [displayState, setDisplayState] = useState("none");
     const showDropdown = () => {
@@ -13,30 +14,18 @@ function Dropdown(props){
         document.querySelector(".dropdown-menu").style.display = displayState
     };
 
-    const items = [
-        {
-            text:"Name A-Z"
-        },
-        {
-            text:"Email A-Z"
-        },
-        {
-            text:"Phone"
-        }
-    ]
-
     return(
      <div className= "input-group-prepend" >
         <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={() => showDropdown()}>Filter By:</button>
         <ul className="dropdown-menu" data-toggle="none">
             {
-                items.map(({text}, index) => {
+                items.map(({text, sortBy}, index) => {
                     return <li 
                     className="dropdown-item"
                     key={index} 
                     value={props.results}
                     onClick={()=> {showDropdown() 
-                        props.handleSortBy(text)}} 
+                        props.handleSortBy({sortBy, text})}} 
                     >
                     {text}
                     </li>
