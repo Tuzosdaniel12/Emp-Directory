@@ -53,6 +53,8 @@ The user should be able to:
 
 [![image](./images/empdirectory.png)](https://employee-direct-finder.herokuapp.com/)
 
+[Live Project Here Or Press Image](https://employee-direct-finder.herokuapp.com/)
+
 ## Credits
 
 Trilogy Teachers, TA and staff
